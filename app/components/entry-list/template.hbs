@@ -1,0 +1,9 @@
+{{#if entries}}
+<div data-test-entries>
+  {{#each entries as |entry|}}
+    {{entry-card entry=entry}}
+  {{/each}}
+</div>
+{{else}}
+  <div data-test-empty-message>{{t "entry.list.empty"}}</div>
+{{/if}}

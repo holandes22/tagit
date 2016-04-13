@@ -1,0 +1,10 @@
+<div data-test-entry-link>{{entry.link}}</div>
+<div data-test-entry-notes>{{entry.notes}}</div>
+<div data-test-entry-tags>{{join ',' entry.tags}}</div>
+<div data-test-entry-archived data-archived={{entry.archived}}>{{if entry.archived (t 'yes') (t 'no')}}</div>
+<div data-test-entry-ranking data-ranking={{entry.ranking}}>{{entry.ranking}}</div>
+
+<button data-test-del-button {{action "del"}}>{{t "delete"}}</button>
+{{#link-to 'entries.entry.edit' entry}}
+  <button>{{t 'edit'}}</button>
+{{/link-to}}

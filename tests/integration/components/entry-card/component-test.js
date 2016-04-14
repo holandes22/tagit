@@ -17,7 +17,7 @@ test('it renders', function(assert) {
   this.render(hbs`{{entry-card entry=entry}}`);
   assert.equal(this.$(testSelector('entry-link')).text(), entry.link);
   assert.equal(this.$(testSelector('entry-notes')).text(), entry.notes);
-  assert.equal(this.$(testSelector('entry-tags')).text(), entry.tags.join());
+  assert.equal(this.$(testSelector('entry-tags')).text(), entry.tags);
   assert.equal(this.$(testSelector('entry-archived')).data('archived'), entry.archived);
   assert.equal(this.$(testSelector('entry-ranking')).data('ranking'), entry.ranking);
 });

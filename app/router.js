@@ -9,7 +9,9 @@ Router.map(function() {
   this.route('entries', function() {
     this.route('entry', { path: ':entry_id' }, function() {
       this.route('edit');
+      this.route('show');
     });
+    this.route('new');
   });
 });
 

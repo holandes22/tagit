@@ -30,9 +30,24 @@ test('it shows a message if entry list is empty', function(assert) {
   this.inject.service('i18n');
   this.set('entries', []);
   this.render(hbs`{{entry-list entries=entries}}`);
-  assert.equal(this.$(testSelector('entries')).children().length, 0);
   assert.equal(
     this.$(testSelector('empty-message')).text(),
     this.get('i18n').t('entry.list.empty')
   );
+});
+
+
+test('it filters out archived if showArchived is false', function(assert) {
+  let entry1 = new EntryFactory().build(1),
+      entry2 = new EntryFactory().build(2),
+      entry3 = new EntryFactory().build(2),
+      entries = [entry1, entry2, entry3];
+
+  entry1.archived = false;
+  entry2.archived = true;
+  entry3.archived = true;
+
+  this.set('entries', entries);
+  this.render(hbs`{{entry-list entries=entries showArchived=false}}`);
+  assert.equal(this.$(testSelector('entries')).children().length, 1);
 });

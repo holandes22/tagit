@@ -4,11 +4,12 @@ export default function() {
   this.namespace = 'api';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
-  this.get('entries', (schema) => {
-    return schema.entry.all();
-  });
+  this.get('entries');
 
-  this.get('entries/:id', (schema, request) => {
-    return schema.entry.find(request.params.id);
-  });
+  this.post('entries');
+
+  this.get('entries/:id');
+
+  this.patch('entries/:id');
+
 }

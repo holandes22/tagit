@@ -1,9 +1,7 @@
-{{#if entries}}
 <div data-test-entries>
-  {{#each entries as |entry|}}
+  {{#each (sort-by sortBy (if showArchived entries (filter-by "archived" false entries))) as |entry|}}
     {{entry-card entry=entry}}
+  {{else}}
+    <div data-test-empty-message>{{t "entry.list.empty"}}</div>
   {{/each}}
 </div>
-{{else}}
-  <div data-test-empty-message>{{t "entry.list.empty"}}</div>
-{{/if}}

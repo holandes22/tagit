@@ -1,0 +1,7 @@
+Link: <input value={{entry.link}} oninput={{action (mut entry.link) value="target.value"}}>
+Notes: <input type="text" value={{entry.notes}} oninput={{action (mut entry.notes) value="target.value"}}>
+Archived?: <input type="checkbox" value={{entry.archived}} oninput={{action (mut entry.archived) value="target.value"}}>
+Ranking: <input type="number" value={{entry.ranking}} oninput={{action (mut entry.ranking) value="target.value"}} min=0>
+Tags: <input value={{entry.tags}} oninput={{action (mut entry.tags) value="target.value"}}>
+
+<button {{action "save"}}>Save</button>

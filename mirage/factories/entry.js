@@ -2,7 +2,6 @@ import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
 
-  id(i) { return i; },
   link(i) { return `http:\/\/a${i}.com`; },
   notes(i) { return `some notes for ${i}`; },
   archived() { return faker.random.boolean(); },

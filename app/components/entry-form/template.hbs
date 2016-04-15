@@ -1,7 +1,45 @@
-Link: <input value={{entry.link}} oninput={{action (mut entry.link) value="target.value"}}>
-Notes: <input type="text" value={{entry.notes}} oninput={{action (mut entry.notes) value="target.value"}}>
-Archived?: <input type="checkbox" value={{entry.archived}} oninput={{action (mut entry.archived) value="target.value"}}>
-Ranking: <input type="number" value={{entry.ranking}} oninput={{action (mut entry.ranking) value="target.value"}} min=0>
-Tags: <input value={{entry.tags}} oninput={{action (mut entry.tags) value="target.value"}}>
+Link:
+<input
+  data-test-link
+  value={{entry.link}}
+  class={{if (and showInvalid validations.attrs.entry.link.isInvalid) "error" ""}}
+  oninput={{action (mut entry.link) value="target.value"}}>
+{{#if showInvalid}}
+<div data-test-link-error>
+  {{validations.attrs.entry.link.message}}
+</div>
+{{/if}}
 
-<button {{action "save"}}>Save</button>
+Notes:
+<input
+  type="text"
+  value={{entry.notes}}
+  class={{if validations.attrs.entry.notes.isValid "error" ""}}
+  oninput={{action (mut entry.notes) value="target.value"}}>
+<div>
+  {{validations.attrs.entry.notes.message}}
+</div>
+
+Archived?:
+<input
+  type="checkbox"
+  value={{entry.archived}}
+  oninput={{action (mut entry.archived) value="target.value"}}>
+
+Ranking:
+<input
+  type="number"
+  value={{entry.ranking}}
+  class={{if validations.attrs.entry.ranking.isValid "error" ""}}
+  oninput={{action (mut entry.ranking)
+  value="target.value"}} min=0>
+<div>
+  {{validations.attrs.entry.ranking.message}}
+</div>
+
+Tags:
+<input
+  value={{entry.tags}}
+  oninput={{action (mut entry.tags) value="target.value"}}>
+
+<button class={{if validations.isInvalid "disabled" ""}} data-test-save-btn {{action "save"}}>Save</button>

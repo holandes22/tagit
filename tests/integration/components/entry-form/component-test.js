@@ -1,24 +1,44 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import testSelector from 'tagit/tests/helpers/ember-test-selectors';
+
 
 moduleForComponent('entry-form', 'Integration | Component | entry form', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+test('it modifies values on input', function(assert) {
+  let entry = {};
+  this.set('entry', entry);
+  this.render(hbs`{{entry-form entry=entry}}`);
 
-  this.render(hbs`{{entry-form}}`);
+  let linkSelector = testSelector('link');
+  assert.equal(this.$(linkSelector).val(), '');
+  this.$(linkSelector).val('http://fake.com');
+  this.$(linkSelector).trigger('input');
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$(linkSelector).val(), entry.link);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#entry-form}}
-      template block text
-    {{/entry-form}}
-  `);
+});
 
-  assert.equal(this.$().text().trim(), 'template block text');
+test('it validates inputs', function(assert) {
+  this.inject.service('store');
+  let entry = {};
+  this.set('entry', entry);
+  this.render(hbs`{{entry-form entry=entry}}`);
+
+  let linkSelector = testSelector('link');
+  assert.notOk(this.$(linkSelector).hasClass('error'));
+  assert.equal(this.$(testSelector('link-error')).text(), '');
+
+  this.$(linkSelector).val('');
+  this.$(linkSelector).trigger('input');
+
+  assert.ok(this.$(linkSelector).hasClass('error'));
+  assert.equal(this.$(testSelector('link-error')).text().trim(), 'This field can\'t be blank');
+  assert.ok(this.$(testSelector('save-btn')).hasClass('disabled'));
+});
+
+test('it sends action up with changed attributes', function(assert) {
+  assert.ok(true);
 });

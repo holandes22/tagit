@@ -13,13 +13,14 @@ const Validations = buildValidations({
 });
 
 export default Ember.Component.extend(Validations, {
-  showInvalid: Ember.computed('entry.{link,notes,ranking}', function() {
-    return Object.keys(this.get('entry')).length !== 0;
-  }),
-
+  showInvalid: false,
   actions: {
     save() {
-      this.attrs.save(this.get('entry'));
+      if (this.get('validations.isInvalid')) {
+        this.set('showInvalid', true);
+      } else {
+        this.attrs.save(this.get('entry'));
+      }
     }
   }
 });

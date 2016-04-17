@@ -22,7 +22,6 @@ test('it modifies values on input', function(assert) {
 });
 
 test('it validates inputs', function(assert) {
-  this.inject.service('store');
   let entry = {};
   this.set('entry', entry);
   this.render(hbs`{{entry-form entry=entry}}`);
@@ -32,13 +31,24 @@ test('it validates inputs', function(assert) {
   assert.equal(this.$(testSelector('link-error')).text(), '');
 
   this.$(linkSelector).val('');
-  this.$(linkSelector).trigger('input');
+  this.$(testSelector('save-btn')).click();
 
   assert.ok(this.$(linkSelector).hasClass('error'));
   assert.equal(this.$(testSelector('link-error')).text().trim(), 'This field can\'t be blank');
-  assert.ok(this.$(testSelector('save-btn')).hasClass('disabled'));
 });
 
 test('it sends action up with changed attributes', function(assert) {
-  assert.ok(true);
+  let entry = {
+    link: 'http://fake.com',
+    notes: 'fake',
+    ranking: 3,
+  };
+  this.set('entry', entry);
+  let save = function(entryToSave) {
+    assert.equal(entry, entryToSave);
+  };
+  this.set('actions', { save });
+  this.render(hbs`{{entry-form entry=entry save=(action 'save')}}`);
+
+  this.$(testSelector('save-btn')).click();
 });

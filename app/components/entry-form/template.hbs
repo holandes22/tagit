@@ -4,6 +4,7 @@ Link:
   value={{entry.link}}
   class={{if (and showInvalid validations.attrs.entry.link.isInvalid) "error" ""}}
   oninput={{action (mut entry.link) value="target.value"}}>
+
 {{#if showInvalid}}
 <div data-test-link-error>
   {{validations.attrs.entry.link.message}}
@@ -16,9 +17,12 @@ Notes:
   value={{entry.notes}}
   class={{if validations.attrs.entry.notes.isValid "error" ""}}
   oninput={{action (mut entry.notes) value="target.value"}}>
-<div>
+
+{{#if showInvalid}}
+<div data-test-notes-error>
   {{validations.attrs.entry.notes.message}}
 </div>
+{{/if}}
 
 Archived?:
 <input
@@ -33,9 +37,12 @@ Ranking:
   class={{if validations.attrs.entry.ranking.isValid "error" ""}}
   oninput={{action (mut entry.ranking)
   value="target.value"}} min=0>
-<div>
+
+{{#if showInvalid}}
+<div data-test-ranking-error>
   {{validations.attrs.entry.ranking.message}}
 </div>
+{{/if}}
 
 Tags:
 <input

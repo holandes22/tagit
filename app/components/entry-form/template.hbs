@@ -45,8 +45,6 @@ Ranking:
 {{/if}}
 
 Tags:
-<input
-  value={{entry.tags}}
-  oninput={{action (mut entry.tags) value="target.value"}}>
+{{tag-picker tags=entry.tags}}
 
 <button class={{if validations.isInvalid "disabled" ""}} data-test-save-btn {{action "save"}}>Save</button>

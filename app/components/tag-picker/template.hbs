@@ -1,0 +1,24 @@
+{{#each tags as |tag|}}
+  <div data-test-tags>
+    <div data-test-tag="{{tag}}">{{tag}}</div>
+    <div data-test-remove="{{tag}}" {{action "remove" tag}}>X</div>
+  </div>
+{{else}}
+  <div data-test-empty-message>{{t "tag.list.empty"}}</div>
+{{/each}}
+
+<input
+  data-test-add-input
+  class="{{if (and showValidations validations.isInvalid) 'error' ''}}"
+  value={{newTag}}
+  oninput={{action (mut newTag) value="target.value"}}>
+
+{{#if showValidations}}
+<div data-test-validation-msg>
+  {{validations.messages}}
+</div>
+{{/if}}
+
+<button data-test-add-btn {{action "add"}}>
+  Add
+</button>

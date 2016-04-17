@@ -5,5 +5,5 @@ export default DS.Model.extend({
   notes: DS.attr('string', { defaultValue: '' }),
   archived: DS.attr('boolean', { defaultValue: false }),
   ranking: DS.attr('number', { defaultValue: 1 }),
-  tags: DS.attr('tags')
+  tags: DS.attr()
 });

@@ -1,50 +1,61 @@
-Link:
-<input
-  data-test-link
-  value={{entry.link}}
-  class={{if (and showInvalid validations.attrs.entry.link.isInvalid) "error" ""}}
-  oninput={{action (mut entry.link) value="target.value"}}>
+<form class="ui form {{if (and showInvalid validations.isInvalid) 'error' ''}}">
+  <h4 class="ui dividing header">Entry</h4>
+  <div class="field">
+    <label>Link</label>
+    <input
+      data-test-link
+      value={{entry.link}}
+      class="{{if (and showInvalid validations.attrs.entry.link.isInvalid) 'error' ''}}"
+      oninput={{action (mut entry.link) value="target.value"}}>
+  </div>
+  {{#if (and showInvalid validations.attrs.entry.link.message)}}
+  <div data-test-link-error class="ui error message">
+    <p>{{validations.attrs.entry.link.message}}</p>
+  </div>
+  {{/if}}
 
-{{#if showInvalid}}
-<div data-test-link-error>
-  {{validations.attrs.entry.link.message}}
-</div>
-{{/if}}
+  <div class="field">
+    <label>Notes</label>
+    <input
+      value={{entry.notes}}
+      class="{{if validations.attrs.entry.notes.isValid 'error' ''}}"
+      oninput={{action (mut entry.notes) value="target.value"}}>
+  </div>
+  {{#if (and showInvalid validations.attrs.entry.notes.message)}}
+  <div data-test-notes-error class="ui error message">
+    <p>{{validations.attrs.entry.notes.messages}}</p>
+  </div>
+  {{/if}}
 
-Notes:
-<input
-  type="text"
-  value={{entry.notes}}
-  class={{if validations.attrs.entry.notes.isValid "error" ""}}
-  oninput={{action (mut entry.notes) value="target.value"}}>
+  <div class="inline field">
+    <div class="ui toggle checkbox">
+      <input
+        type="checkbox"
+        class="hidden"
+        tabindex="0"
+        value={{entry.archived}}
+        oninput={{action (mut entry.archived) value="target.value"}}>
+      <label>Archived?</label>
+    </div>
+  </div>
 
-{{#if showInvalid}}
-<div data-test-notes-error>
-  {{validations.attrs.entry.notes.message}}
-</div>
-{{/if}}
-
-Archived?:
-<input
-  type="checkbox"
-  value={{entry.archived}}
-  oninput={{action (mut entry.archived) value="target.value"}}>
-
-Ranking:
-<input
-  type="number"
-  value={{entry.ranking}}
-  class={{if validations.attrs.entry.ranking.isValid "error" ""}}
-  oninput={{action (mut entry.ranking)
-  value="target.value"}} min=0>
-
-{{#if showInvalid}}
-<div data-test-ranking-error>
-  {{validations.attrs.entry.ranking.message}}
-</div>
-{{/if}}
-
-Tags:
+  <div class="field">
+    <label>Rating</label>
+    <input
+      type="number"
+      value={{entry.ranking}}
+      class="{{if validations.attrs.entry.ranking.isValid 'error' ''}}"
+      oninput={{action (mut entry.ranking)
+      value="target.value"}} min=0>
+  </div>
+  {{#if (and showInvalid validations.attrs.entry.ranking.message)}}
+  <div data-test-ranking-error class="ui error message">
+    <p>{{validations.attrs.entry.ranking.message}}</p>
+  </div>
+  {{/if}}
+</form>
+<h5>Tags</h5>
 {{tag-picker tags=entry.tags}}
-
-<button class={{if validations.isInvalid "disabled" ""}} data-test-save-btn {{action "save"}}>Save</button>
+<br>
+<br>
+<button class="ui blue button" data-test-save-btn {{action "save"}}>Save</button>

@@ -1,5 +1,17 @@
-<h2 id="title">Welcome to Tagit</h2>
+<div class="ui inverted large top fixed menu">
+  <div class="ui container">
+    {{link-to "Home" "index" class="item"}}
+    {{link-to "Entries" "entries" class="item"}}
+    <div class="right menu">
+      <div class="item">
+        <a class="ui inverted button">Log in</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-{{link-to 'Home' 'index'}}
-{{link-to 'Entries' 'entries'}}
+<br/>
+
+<div class="ui main container">
 {{outlet}}
+</div>

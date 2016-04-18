@@ -1,24 +1,28 @@
 {{#each tags as |tag|}}
-  <div data-test-tags>
-    <div data-test-tag="{{tag}}">{{tag}}</div>
-    <div data-test-remove="{{tag}}" {{action "remove" tag}}>X</div>
-  </div>
+<a class="ui tag label" data-test-tag="{{tag}}">
+  {{tag}}
+  <i data-test-remove="{{tag}}" {{action "remove" tag}} class="delete icon"></i>
+</a>
 {{else}}
   <div data-test-empty-message>{{t "tag.list.empty"}}</div>
 {{/each}}
 
-<input
-  data-test-add-input
-  class="{{if (and showValidations validations.isInvalid) 'error' ''}}"
-  value={{newTag}}
-  oninput={{action (mut newTag) value="target.value"}}>
+<br>
+<br>
 
+<div class="ui action input">
+  <input
+    data-test-add-input
+    class="{{if (and showValidations validations.isInvalid) 'error' ''}}"
+    value={{newTag}}
+    oninput={{action (mut newTag) value="target.value"}}>
+  <button data-test-add-btn {{action "add"}} class="ui right labeled icon button">
+    <i class="plus icon"></i>
+    Add tag
+  </button>
+</div>
 {{#if showValidations}}
-<div data-test-validation-msg>
-  {{validations.messages}}
+<div data-test-validation-msg class="ui error message">
+  <p>{{validations.messages}}</p>
 </div>
 {{/if}}
-
-<button data-test-add-btn {{action "add"}}>
-  Add
-</button>

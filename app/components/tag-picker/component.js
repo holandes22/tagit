@@ -9,6 +9,7 @@ const Validations = buildValidations({
 });
 
 export default Ember.Component.extend(Validations, {
+  tagName: '',
   newTag: null,
   init() {
     this._super(...arguments);

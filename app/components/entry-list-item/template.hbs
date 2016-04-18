@@ -1,0 +1,24 @@
+<div class="item">
+  <div class="right floated content">
+    <div class="ui two tiny buttons">
+      <div class="ui basic red button" data-test-del-button  {{action "del"}}>{{t "delete"}}</div>
+      {{link-to (t "edit") "entries.entry.edit" entry class="ui basic green button"}}
+    </div>
+  </div>
+  <i
+    data-test-entry-archived
+    data-archived="{{entry.archived}}"
+    class="large {{if entry.archived 'archive' 'linkify'}} middle aligned icon"></i>
+  <div class="content">
+    <a class="header" data-test-entry-link>{{entry.link}}</a>
+    <div class="description" data-test-entry-notes>{{entry.notes}}</div>
+    <div class="description" data-test-entry-ranking data-ranking={{entry.ranking}}>
+      Ranking: {{entry.ranking}}
+    </div>
+    {{#each entry.tags as |tag|}}
+      <a data-test-entry-tags class="ui tag small label">{{tag}}</a>
+    {{else}}
+      <div class="ui small red basic label">Untagged</div>
+    {{/each}}
+  </div>
+</div>

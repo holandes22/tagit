@@ -25,34 +25,42 @@ test('it renders tags', function(assert) {
   let tags = ['ember', 'elixir'];
   this.set('tags', tags);
   this.render(hbs`{{tag-picker tags=tags}}`);
-  assert.equal(this.$(testSelector('tags')).length, tags.length);
-  assert.equal(this.$(testSelector('tag', 'ember')).text(), 'ember');
-  assert.equal(this.$(testSelector('tag', 'elixir')).text(), 'elixir');
+  assert.equal(this.$(testSelector('tag')).length, tags.length);
+  assert.equal(this.$(testSelector('remove')).length, tags.length);
+  assert.equal(this.$(testSelector('tag', 'ember')).text().trim(), 'ember');
+  assert.equal(this.$(testSelector('tag', 'elixir')).text().trim(), 'elixir');
 });
 
-test('it adds a tag, avoiding dups and normalizing it', function(assert) {
+test('it sends up a normalized tag to add', function(assert) {
   let tags = [];
   this.set('tags', tags);
-  this.render(hbs`{{tag-picker tags=tags}}`);
+  let add = function(tag) {
+    tags.pushObject(tag);
+  };
+  this.set('actions', { add });
+  this.render(hbs`{{tag-picker tags=tags add=(action "add")}}`);
   assert.equal(this.$(testSelector('tags')).length, 0);
   this.$(testSelector('add-input')).val('emberData_1').trigger('input');
   this.$(testSelector('add-btn')).click();
   this.$(testSelector('add-input')).val('elixir').trigger('input');
   this.$(testSelector('add-btn')).click();
-  this.$(testSelector('add-input')).val('elixir').trigger('input');
-  this.$(testSelector('add-btn')).click();
-  assert.equal(this.$(testSelector('tags')).length, 2);
-  assert.equal(this.$(testSelector('tag', 'ember-data-1')).text(), 'ember-data-1');
-  assert.equal(this.$(testSelector('tag', 'elixir')).text(), 'elixir');
+  assert.equal(this.$(testSelector('tag')).length, 2);
+  assert.equal(this.$(testSelector('tag', 'ember-data-1')).text().trim(), 'ember-data-1');
+  assert.equal(this.$(testSelector('tag', 'elixir')).text().trim(), 'elixir');
 });
 
-test('it removes a tag', function(assert) {
+test('it sends up a tag to remove', function(assert) {
   let tags = ['ember'];
+  let remove = function(tag) {
+    assert.equal(tag, 'ember');
+    tags.removeObject(tag);
+  };
+  this.set('actions', { remove });
   this.set('tags', tags);
-  this.render(hbs`{{tag-picker tags=tags}}`);
-  assert.equal(this.$(testSelector('tags')).length, 1);
+  this.render(hbs`{{tag-picker tags=tags remove=(action "remove")}}`);
+  assert.equal(this.$(testSelector('tag')).length, 1);
   this.$(testSelector('remove', 'ember')).click();
-  assert.equal(this.$(testSelector('tags')).length, 0);
+  assert.equal(this.$(testSelector('tag')).length, 0);
 });
 
 test('it shows invalid if empty string', function(assert) {

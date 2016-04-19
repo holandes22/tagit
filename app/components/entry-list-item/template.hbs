@@ -4,6 +4,9 @@
       <div class="ui basic red button" data-test-del-button  {{action "del"}}>{{t "delete"}}</div>
       {{link-to (t "edit") "entries.entry.edit" entry class="ui basic green button"}}
     </div>
+    <br>
+    <br>
+    {{ui-rating rating=entry.ranking maxRating=5 interactive=false}}
   </div>
   <i
     data-test-entry-archived
@@ -12,13 +15,10 @@
   <div class="content">
     <a class="header" data-test-entry-link>{{entry.link}}</a>
     <div class="description" data-test-entry-notes>{{entry.notes}}</div>
-    <div class="description" data-test-entry-ranking data-ranking={{entry.ranking}}>
-      Ranking: {{entry.ranking}}
-    </div>
     {{#each entry.tags as |tag|}}
       <a data-test-entry-tags class="ui tag small label">{{tag}}</a>
     {{else}}
-      <div class="ui small red basic label">Untagged</div>
+      <div class="ui small red basic label">{{t 'tag.list.empty' }}</div>
     {{/each}}
   </div>
 </div>

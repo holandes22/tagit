@@ -20,7 +20,8 @@ test('it renders', function(assert) {
   assert.equal(this.$(testSelector('entry-notes')).text(), entry.notes);
   assert.equal(this.$(testSelector('entry-tags')).text(), entry.tags.join(''));
   assert.equal(this.$(testSelector('entry-archived')).data('archived'), entry.archived);
-  assert.equal(this.$(testSelector('entry-ranking')).data('ranking'), entry.ranking);
+  assert.equal(this.$('.ui.rating').children().length, 5);
+  assert.equal(this.$('.ui.rating').children('.active').length, entry.ranking);
 });
 
 

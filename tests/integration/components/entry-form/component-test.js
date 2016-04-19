@@ -7,20 +7,6 @@ moduleForComponent('entry-form', 'Integration | Component | entry form', {
   integration: true
 });
 
-test('it modifies values on input', function(assert) {
-  let entry = {};
-  this.set('entry', entry);
-  this.render(hbs`{{entry-form entry=entry}}`);
-
-  let linkSelector = testSelector('link');
-  assert.equal(this.$(linkSelector).val(), '');
-  this.$(linkSelector).val('http://fake.com');
-  this.$(linkSelector).trigger('input');
-
-  assert.equal(this.$(linkSelector).val(), entry.link);
-
-});
-
 test('it validates inputs', function(assert) {
   let entry = {};
   this.set('entry', entry);
@@ -37,15 +23,35 @@ test('it validates inputs', function(assert) {
   assert.equal(this.$(testSelector('link-error')).text().trim(), 'This field can\'t be blank');
 });
 
-test('it sends action up with changed attributes', function(assert) {
+test('it sends attributes up when creating', function(assert) {
+  let link = 'http://fake.com';
+  let save = function(entryToSave) {
+    assert.equal(entryToSave.link, link);
+  };
+  this.set('actions', { save });
+  this.render(hbs`{{entry-form save=(action 'save')}}`);
+
+  assert.equal(this.$(testSelector('link-error')).text(), '');
+
+  this.$(testSelector('link')).val(link);
+  this.$(testSelector('save-btn')).click();
+});
+
+test('it sends action up with attributes', function(assert) {
   let entry = {
     link: 'http://fake.com',
     notes: 'fake',
+    archived: true,
     ranking: 3,
+    tags:[],
   };
   this.set('entry', entry);
   let save = function(entryToSave) {
-    assert.equal(entry, entryToSave);
+    assert.equal(entryToSave.link, entry.link);
+    assert.equal(entryToSave.notes, entry.notes);
+    assert.equal(entryToSave.archived, entry.archived);
+    assert.equal(entryToSave.ranking, entry.ranking);
+    assert.equal(entryToSave.tags.length, entry.tags.length);
   };
   this.set('actions', { save });
   this.render(hbs`{{entry-form entry=entry save=(action 'save')}}`);

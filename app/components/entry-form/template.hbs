@@ -4,26 +4,26 @@
     <label>Link</label>
     <input
       data-test-link
-      value={{entry.link}}
-      class="{{if (and showInvalid validations.attrs.entry.link.isInvalid) 'error' ''}}"
-      oninput={{action (mut entry.link) value="target.value"}}>
+      value={{link}}
+      class="{{if (and showInvalid validations.attrs.link.isInvalid) 'error' ''}}"
+      oninput={{action (mut link) value="target.value"}}>
   </div>
-  {{#if (and showInvalid validations.attrs.entry.link.message)}}
+  {{#if (and showInvalid validations.attrs.link.message)}}
   <div data-test-link-error class="ui error message">
-    <p>{{validations.attrs.entry.link.message}}</p>
+    <p>{{validations.attrs.link.message}}</p>
   </div>
   {{/if}}
 
   <div class="field">
     <label>Notes</label>
     <input
-      value={{entry.notes}}
-      class="{{if validations.attrs.entry.notes.isValid 'error' ''}}"
-      oninput={{action (mut entry.notes) value="target.value"}}>
+      value={{notes}}
+      class="{{if validations.attrs.notes.isValid 'error' ''}}"
+      oninput={{action (mut notes) value="target.value"}}>
   </div>
-  {{#if (and showInvalid validations.attrs.entry.notes.message)}}
+  {{#if (and showInvalid validations.attrs.notes.message)}}
   <div data-test-notes-error class="ui error message">
-    <p>{{validations.attrs.entry.notes.messages}}</p>
+    <p>{{validations.attrs.notes.messages}}</p>
   </div>
   {{/if}}
 
@@ -33,29 +33,21 @@
         type="checkbox"
         class="hidden"
         tabindex="0"
-        value={{entry.archived}}
-        oninput={{action (mut entry.archived) value="target.value"}}>
+        value={{archived}}
+        oninput={{action (mut archived) value="target.value"}}>
       <label>Archived?</label>
     </div>
   </div>
 
   <div class="field">
     <label>Rating</label>
-    <input
-      type="number"
-      value={{entry.ranking}}
-      class="{{if validations.attrs.entry.ranking.isValid 'error' ''}}"
-      oninput={{action (mut entry.ranking)
-      value="target.value"}} min=0>
+    {{ui-rating initialRating=ranking maxRating=5 onRate=(action "rate")}}
   </div>
-  {{#if (and showInvalid validations.attrs.entry.ranking.message)}}
-  <div data-test-ranking-error class="ui error message">
-    <p>{{validations.attrs.entry.ranking.message}}</p>
-  </div>
-  {{/if}}
+
 </form>
 <h5>Tags</h5>
-{{tag-picker tags=entry.tags}}
+<div class="divider"></div>
+{{tag-picker tags=tags add=(action "addTag") remove=(action "removeTag")}}
 <br>
 <br>
 <button class="ui blue button" data-test-save-btn {{action "save"}}>Save</button>

@@ -4,5 +4,5 @@ export default {
   'delete': 'Delete',
   'edit': 'Edit',
   'entry.list.empty': 'Empty list',
-  'tag.list.empty': 'No tags'
+  'tag.list.empty': 'Untagged'
 };

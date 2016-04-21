@@ -9,9 +9,7 @@ Router.map(function() {
   this.route('entries.entry.edit', { path: 'entries/entry/:entry_id/edit' });
   this.route('entries.new', { path: 'entries/new' });
   this.route('entries', function() {
-    this.route('entry', { path: ':entry_id' }, function() {
-      this.route('show');
-    });
+    this.route('entry', { path: ':entry_id' });
   });
 });
 

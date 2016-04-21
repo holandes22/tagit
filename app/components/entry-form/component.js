@@ -38,9 +38,9 @@ export default Ember.Component.extend(Validations, {
         let link = this.get('link'),
             notes = this.get('notes'),
             archived = this.get('archived'),
-            ranking = this.get('ranking'),
+            rating = this.get('rating'),
             tags = this.get('tags'),
-            entry = { link, notes, archived, ranking, tags };
+            entry = { link, notes, archived, rating, tags };
         this.attrs.save(entry);
       }
     },
@@ -48,7 +48,7 @@ export default Ember.Component.extend(Validations, {
       //TODO: this raises a deprecation warning. browse to entry.new to see it
       //and also during test runs
       //DEPRECATION: A property of <...> was modified inside the didInsertElement hook.
-      this.set('ranking', value);
+      this.set('rating', value);
     }
   }
 });

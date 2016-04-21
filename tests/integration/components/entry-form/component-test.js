@@ -42,7 +42,7 @@ test('it sends action up with attributes', function(assert) {
     link: 'http://fake.com',
     notes: 'fake',
     archived: true,
-    ranking: 3,
+    rating: 3,
     tags:[],
   };
   this.set('entry', entry);
@@ -50,7 +50,7 @@ test('it sends action up with attributes', function(assert) {
     assert.equal(entryToSave.link, entry.link);
     assert.equal(entryToSave.notes, entry.notes);
     assert.equal(entryToSave.archived, entry.archived);
-    assert.equal(entryToSave.ranking, entry.ranking);
+    assert.equal(entryToSave.rating, entry.rating);
     assert.equal(entryToSave.tags.length, entry.tags.length);
   };
   this.set('actions', { save });

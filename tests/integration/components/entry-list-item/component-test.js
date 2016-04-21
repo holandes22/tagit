@@ -21,7 +21,7 @@ test('it renders', function(assert) {
   assert.equal(this.$(testSelector('entry-tags')).text(), entry.tags.join(''));
   assert.equal(this.$(testSelector('entry-archived')).data('archived'), entry.archived);
   assert.equal(this.$('.ui.rating').children().length, 5);
-  assert.equal(this.$('.ui.rating').children('.active').length, entry.ranking);
+  assert.equal(this.$('.ui.rating').children('.active').length, entry.rating);
 });
 
 

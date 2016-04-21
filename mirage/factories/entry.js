@@ -5,7 +5,7 @@ export default Factory.extend({
   link(i) { return `http:\/\/a${i}.com`; },
   notes(i) { return `some notes for ${i}`; },
   archived() { return faker.random.boolean(); },
-  ranking() {
+  rating() {
     return faker.random.number({ min: 1, max: 5 });
   },
   tags() {

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  entry: Ember.computed('model.{link,notes,archived,ranking,tags}', function() {
+  entry: Ember.computed('model.{link,notes,archived,rating,tags}', function() {
     return this.get('model').toJSON();
   }),
 

@@ -1,6 +1,6 @@
 <div class="item">
-  {{#if (eq active entry.id)}}
-  <a class="ui blue ribbon label">Active</a>
+  {{#if (eq filters.lastEntry entry.id)}}
+    <a class="ui blue ribbon label">{{filters.lastEntryLabel}}</a>
   {{/if}}
   <div class="right floated content">
     <div class="ui two tiny buttons">

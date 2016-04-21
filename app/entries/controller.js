@@ -1,12 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['active'],
-  active: null,
+  filters: Ember.inject.service(),
+
   showArchived: true,
+
   actions: {
-    clearActive() {
-      this.set('active', null);
+    clearHighlight() {
+      this.set('filters.lastEntry', null);
     }
   }
 });

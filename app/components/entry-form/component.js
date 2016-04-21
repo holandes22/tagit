@@ -45,7 +45,8 @@ export default Ember.Component.extend(Validations, {
       }
     },
     rate(callback, value) {
-      //TODO: this raises, during tests a deprecation warning:
+      //TODO: this raises a deprecation warning. browse to entry.new to see it
+      //and also during test runs
       //DEPRECATION: A property of <...> was modified inside the didInsertElement hook.
       this.set('ranking', value);
     }

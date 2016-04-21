@@ -1,8 +1,19 @@
 {{#if entries}}
 <div data-test-entries class="ui very relaxed divided large animated list">
-  {{#each (sort-by sortBy (if showArchived entries (filter-by "archived" false entries))) as |entry|}}
-    {{entry-list-item entry=entry}}
-  {{/each}}
+  {{#with (sort-by sortBy (if showArchived entries (filter-by "archived" false entries))) as |filteredEntries|}}
+    {{#if active}} {{!--Put the active entry at the top of the list--}}
+      {{#with (find-by 'id' active filteredEntries) as |activeEntry|}}
+        {{entry-list-item entry=activeEntry active=active}}
+        {{#each (without activeEntry filteredEntries) as |entry|}}
+          {{entry-list-item entry=entry active=active}}
+        {{/each}}
+      {{/with}}
+    {{else}}
+      {{#each filteredEntries as |entry|}}
+        {{entry-list-item entry=entry active=active}}
+      {{/each}}
+    {{/if}}
+  {{/with}}
 </div>
 {{else}}
 <div data-test-empty-message>{{t "entry.list.empty"}}</div>

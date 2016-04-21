@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
     save(entry) {
       let model = this.store.createRecord('entry', entry);
       model.save().then(() => {
-        this.transitionToRoute('entries.entry.show', model);
+        this.transitionToRoute('entries', { queryParams: { active: model.id } });
       });
     }
   }

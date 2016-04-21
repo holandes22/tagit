@@ -1,2 +1,9 @@
-{{link-to "New entry" "entries.new" class="ui button"}}
-{{entry-list entries=model showArchived=true}}
+{{link-to "New entry" "entries.new" class="ui purple basic button"}}
+
+<div class="ui purple basic button" {{action "clearActive"}}>Clear active</div>
+
+<div class="ui purple basic button" {{action (pipe (action "clearActive") (toggle "showArchived" this))}}>
+  {{if  showArchived "Hide archived" "Show archived"}}
+</div>
+
+{{entry-list entries=model showArchived=showArchived active=active}}

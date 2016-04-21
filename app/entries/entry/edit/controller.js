@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
       let model = this.get('model');
       model.setProperties(properties);
       this.model.save().then(() => {
-        this.transitionToRoute('entries.entry.show', model);
+        this.transitionToRoute('entries', { queryParams: { active: model.id } });
       });
     }
   }

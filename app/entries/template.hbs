@@ -5,7 +5,7 @@
 <div class="ui purple basic button" {{action "clearHighlight"}}>clear highlight</div>
 {{/if}}
 
-<div class="ui purple basic button" {{action (pipe (action "clearHighlight") (toggle "showArchived" this))}}>
+<div data-test-toggle-archived class="ui purple basic button" {{action (pipe (action "clearHighlight") (toggle "showArchived" this))}}>
   {{if  showArchived "Hide archived" "Show archived"}}
 </div>
 

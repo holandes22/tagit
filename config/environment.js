@@ -20,7 +20,12 @@ module.exports = function(environment) {
 
     i18n: {
       defaultLocale: 'en'
-    }
+    },
+
+    flashMessageDefaults: {
+      timeout: 4000,
+      types: ['positive', 'negative', 'info']
+    },
 
   };
 

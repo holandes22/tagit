@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
         this.set('filters.lastEntry', model.id);
         //TODO: translate
         this.set('filters.lastEntryLabel', 'New');
+        this.get('flashMessages').positive('Entry added');
         this.transitionToRoute('entries');
       });
     }

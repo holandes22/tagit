@@ -7,6 +7,8 @@ const Validations = buildValidations({
 });
 
 export default Ember.Component.extend(Validations, {
+  flashMessages: Ember.inject.service(),
+  rating: 0,
   showInvalid: false,
   init() {
     this._super(...arguments);
@@ -23,9 +25,11 @@ export default Ember.Component.extend(Validations, {
   actions: {
     addTag(tag) {
       let tags = this.get('tags');
-      //TODO: show flash message if tag already there
       if (!tags.includes(tag)) {
         tags.pushObject(tag);
+      } else {
+        //TODO: translate
+        this.get('flashMessages').info('Skipping repeated tag');
       }
     },
     removeTag(tag) {
@@ -44,11 +48,8 @@ export default Ember.Component.extend(Validations, {
         this.attrs.save(entry);
       }
     },
-    rate(callback, value) {
-      //TODO: this raises a deprecation warning. browse to entry.new to see it
-      //and also during test runs
-      //DEPRECATION: A property of <...> was modified inside the didInsertElement hook.
-      this.set('rating', value);
+    updateRate(params) {
+      this.set('rating', params.rating);
     }
   }
 });

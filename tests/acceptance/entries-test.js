@@ -62,14 +62,17 @@ test('it edits an entry', function(assert) {
   });
 });
 
-/* TODO: this test fits better in the entry-form component test
-test('it shows a flash message when adding the same tag in an entry-form', function(assert) {
-  visit('/entries');
-  click(testSelector('toggle-archived'));
 
+test('it shows a flash message when adding a repeated tag', function(assert) {
+  visit('/entries/new');
+
+  fillIn(testSelector('add-tag-input'), 'ember');
+  click(testSelector('add-tag-btn'));
+  assert.equal(find(testSelector('flash-msg')).text(), '');
+
+  fillIn(testSelector('add-tag-input'), 'ember');
+  click(testSelector('add-tag-btn'));
   andThen(function() {
-    assert.equal(currentURL(), '/entries');
-    assert.equal(find(testSelector('entries')).children().length, 1);
+    assert.equal(find(testSelector('flash-msg')).text(), 'Skipping repeated tag');
   });
 });
-*/

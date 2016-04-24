@@ -16,7 +16,11 @@
     data-archived="{{entry.archived}}"
     class="large {{if entry.archived 'archive' 'linkify'}} middle aligned icon"></i>
   <div class="content">
+    {{#if linkIsValid}}
     <a class="header" href="{{entry.link}}" data-test-entry-link>{{entry.link}}</a>
+    {{else}}
+    <a class="header" data-test-entry-link>{{entry.link}}</a>
+    {{/if}}
     <div class="description" data-test-entry-notes>{{entry.notes}}</div>
     {{#each entry.tags as |tag|}}
       <a data-test-entry-tags class="ui tag small label">{{tag}}</a>

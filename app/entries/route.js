@@ -10,6 +10,7 @@ export default Ember.Route.extend({
   actions: {
     willTransition() {
       this.set('filters.lastEntry', null);
+      this.get('flashMessages').clearMessages();
       return true;
     }
   }

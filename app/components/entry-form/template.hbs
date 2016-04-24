@@ -16,10 +16,7 @@
 
   <div class="field">
     <label>Notes</label>
-    <input
-      value={{notes}}
-      class="{{if validations.attrs.notes.isValid 'error' ''}}"
-      oninput={{action (mut notes) value="target.value"}}>
+    {{input name="notes" value=notes class=(if validations.attrs.notes.isValid '' 'error')}}
   </div>
   {{#if (and showInvalid validations.attrs.notes.message)}}
   <div data-test-notes-error class="ui error message">
@@ -29,19 +26,18 @@
 
   <div class="inline field">
     <div class="ui toggle checkbox">
-      <input
-        type="checkbox"
-        class="hidden"
-        tabindex="0"
-        value={{archived}}
-        oninput={{action (mut archived) value="target.value"}}>
+      {{input type="checkbox" name="archived" checked=archived}}
       <label>Archived?</label>
     </div>
   </div>
 
   <div class="field">
     <label>Rating</label>
-    {{ui-rating initialRating=rating maxRating=5 onRate=(action "rate")}}
+    {{#star-rating rating=rating on-click=(action "updateRate")  as |stars set|}}
+      {{#each stars as |star|}}
+        <i {{action set star.rating}} class="{{if star.full '' 'empty'}} star icon cursor-pointer"></i>
+      {{/each}}
+    {{/star-rating}}
   </div>
 
 </form>

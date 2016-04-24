@@ -12,11 +12,11 @@
 
 <div class="ui action input">
   <input
-    data-test-add-input
+    data-test-add-tag-input
     class="{{if (and showValidations validations.isInvalid) 'error' ''}}"
     value={{newTag}}
     oninput={{action (mut newTag) value="target.value"}}>
-  <button data-test-add-btn {{action "add"}} class="ui right labeled icon button">
+  <button data-test-add-tag-btn {{action "add"}} class="ui right labeled icon button">
     <i class="plus icon"></i>
     Add tag
   </button>

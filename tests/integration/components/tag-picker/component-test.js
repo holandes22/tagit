@@ -18,7 +18,7 @@ test('it renders empty', function(assert) {
     this.get('i18n').t('tag.list.empty')
   );
   assert.equal(this.$(testSelector('validation-msg')).text(), '');
-  assert.notOk(this.$(testSelector('add-input')).hasClass('error'));
+  assert.notOk(this.$(testSelector('add-tag-input')).hasClass('error'));
 });
 
 test('it renders tags', function(assert) {
@@ -40,10 +40,10 @@ test('it sends up a normalized tag to add', function(assert) {
   this.set('actions', { add });
   this.render(hbs`{{tag-picker tags=tags add=(action "add")}}`);
   assert.equal(this.$(testSelector('tags')).length, 0);
-  this.$(testSelector('add-input')).val('emberData_1').trigger('input');
-  this.$(testSelector('add-btn')).click();
-  this.$(testSelector('add-input')).val('elixir').trigger('input');
-  this.$(testSelector('add-btn')).click();
+  this.$(testSelector('add-tag-input')).val('emberData_1').trigger('input');
+  this.$(testSelector('add-tag-btn')).click();
+  this.$(testSelector('add-tag-input')).val('elixir').trigger('input');
+  this.$(testSelector('add-tag-btn')).click();
   assert.equal(this.$(testSelector('tag')).length, 2);
   assert.equal(this.$(testSelector('tag', 'ember-data-1')).text().trim(), 'ember-data-1');
   assert.equal(this.$(testSelector('tag', 'elixir')).text().trim(), 'elixir');
@@ -66,13 +66,13 @@ test('it sends up a tag to remove', function(assert) {
 test('it shows invalid if empty string', function(assert) {
   this.set('tags', []);
   this.render(hbs`{{tag-picker tags=tags}}`);
-  this.$(testSelector('add-input')).val('').trigger('input');
-  this.$(testSelector('add-btn')).click();
+  this.$(testSelector('add-tag-input')).val('').trigger('input');
+  this.$(testSelector('add-tag-btn')).click();
   assert.equal(
     this.$(testSelector('validation-msg')).text().trim(),
     "This field can't be blank"
   );
-  assert.ok(this.$(testSelector('add-input')).hasClass('error'));
+  assert.ok(this.$(testSelector('add-tag-input')).hasClass('error'));
   assert.equal(this.$(testSelector('tags')).length, 0);
 });
 
@@ -80,8 +80,8 @@ test('it shows invalid if string too long', function(assert) {
   this.set('tags', []);
   this.render(hbs`{{tag-picker tags=tags}}`);
   let longStr = new Array(50).join("a");
-  this.$(testSelector('add-input')).val(longStr).trigger('input');
-  this.$(testSelector('add-btn')).click();
+  this.$(testSelector('add-tag-input')).val(longStr).trigger('input');
+  this.$(testSelector('add-tag-btn')).click();
   assert.equal(
     this.$(testSelector('validation-msg')).text().trim(),
     'This field is too long (maximum is 25 characters)'

@@ -12,4 +12,6 @@ export default function() {
 
   this.patch('entries/:id');
 
+  this.del('entries/:id');
+
 }

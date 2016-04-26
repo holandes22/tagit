@@ -6,7 +6,7 @@
 {{/if}}
 
 <div data-test-toggle-archived class="ui purple basic button" {{action (pipe (action "clearHighlight") (toggle "showArchived" this))}}>
-  {{if  showArchived "Hide archived" "Show archived"}}
+  {{if showArchived "Hide archived" "Show archived"}}
 </div>
 
-{{entry-list entries=model showArchived=showArchived}}
+{{entry-list entries=model showArchived=showArchived del=(action "delEntry")}}

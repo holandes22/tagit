@@ -3,19 +3,22 @@ import { task, timeout } from 'ember-concurrency';
 
 
 export default Ember.Component.extend({
-  remaining: 4,
+  percent: 100,
+
+  delay: 100,
 
   mouseUp() {
-    this.set('remaining', 4);
+    this.set('percent', 100);
     this.get('task').cancelAll();
   },
 
   task: task(function * () {
-    let remaining = this.get('remaining');
-    while(remaining > 0) {
-      remaining = remaining - 1;
-      this.set('remaining', remaining);
-      yield timeout(500);
+    let percent = this.get('percent'),
+        delay = this.get('delay');
+    while(percent > 0) {
+      percent = percent - 5;
+      this.set('percent', percent);
+      yield timeout(delay);
     }
     this.attrs.action();
   }).on('mouseDown').restartable()

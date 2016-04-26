@@ -3,8 +3,13 @@
     <a data-test-ribbon class="ui blue ribbon label">{{filters.lastEntryLabel}}</a>
   {{/if}}
   <div class="right floated content">
-    <div class="ui two tiny buttons">
-      <div class="ui basic red button" data-test-del-button  {{action "del"}}>{{t "delete"}}</div>
+    <div class="ui two buttons">
+      <div class="ui basic red button">
+      {{#hold-button action=(action "del") as |hold|}}
+        Hold to delete
+        {{hold.progress}}
+      {{/hold-button}}
+      </div>
       {{link-to (t "edit") "entries.entry.edit" entry class="ui basic green button"}}
     </div>
     <br>

@@ -35,16 +35,3 @@ test('it avoids adding href if link does not start with correct protocol', funct
   assert.equal(this.$(testSelector('entry-link')).text().trim(), entry.link);
   assert.equal(this.$(testSelector('entry-link')).attr('href'), undefined);
 });
-
-
-test('it bubbles up delete action', function(assert) {
-  let entry = new EntryFactory().build(1);
-  let del = function(entryToDelete) {
-    assert.equal(entry.id, entryToDelete.id);
-  };
-  this.set('entry', entry);
-  this.set('actions', { del });
-
-  this.render(hbs`{{entry-list-item entry=entry del=(action 'del')}}`);
-  this.$(testSelector('del-button')).click();
-});

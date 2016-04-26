@@ -1,7 +1,1 @@
-<div class="ui button">
-  {{#if task.isIdle}}
-    Hold to delete
-  {{else}}
-    Deleting in {{remaining}}
-  {{/if}}
-</div>
+{{yield (hash progress=(component 'hold-button/progress' percent=percent task=task))}}

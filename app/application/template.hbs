@@ -1,5 +1,4 @@
 <div class="ui inverted large top fixed menu">
-  <div class="ui container">
     {{link-to "Home" "index" class="item"}}
     {{link-to "Entries" "entries" class="item"}}
     <div class="right menu">
@@ -7,11 +6,12 @@
         <a class="ui inverted button">Log in</a>
       </div>
     </div>
-  </div>
 </div>
 
 
-<div class="ui main container">
+<div class="ui main">
+<br>
+<br>
 {{#each flashMessages.queue as |flash|}}
   {{#flash-message flash=flash as |component flash|}}
     {{#if flash.componentName}}
@@ -23,6 +23,7 @@
     {{/if}}
   {{/flash-message}}
 {{/each}}
+<br>
 <br>
 {{outlet}}
 </div>

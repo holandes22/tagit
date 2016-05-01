@@ -5,12 +5,16 @@
       {{#with (find-by 'id' filters.lastEntry filteredEntries) as |lastEntry|}}
         {{entry-list-item entry=lastEntry del=(action "del")}}
         {{#each (without lastEntry filteredEntries) as |entry|}}
-          {{entry-list-item entry=entry del=(action "del")}}
+          {{#if (or (not selectedTags) (contains selectedTags entry.tags))}}
+            {{entry-list-item entry=entry del=(action "del")}}
+          {{/if}}
         {{/each}}
       {{/with}}
     {{else}}
       {{#each filteredEntries as |entry|}}
-        {{entry-list-item entry=entry del=(action "del")}}
+        {{#if (or (not selectedTags) (contains selectedTags entry.tags))}}
+          {{entry-list-item entry=entry del=(action "del")}}
+        {{/if}}
       {{/each}}
     {{/if}}
   {{/with}}

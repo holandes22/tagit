@@ -19,7 +19,7 @@ test('it toggles archived entries', function(assert) {
   server.create('entry', { archived: true });
   server.create('entry', { archived: false});
   visit('/entries');
-  click(testSelector('toggle-archived'));
+  click(testSelector('toggle-archived') + ' input');
 
   andThen(function() {
     assert.equal(currentURL(), '/entries');

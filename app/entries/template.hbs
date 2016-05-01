@@ -1,12 +1,42 @@
-{{link-to "New entry" "entries.new" class="ui purple basic button"}}
-
-
-{{#if filters.lastEntry}}
-<div class="ui purple basic button" {{action "clearHighlight"}}>clear highlight</div>
-{{/if}}
-
-<div data-test-toggle-archived class="ui purple basic button" {{action (pipe (action "clearHighlight") (toggle "showArchived" this))}}>
-  {{if showArchived "Hide archived" "Show archived"}}
+<div class="ui grid">
+  <div class="twelve wide column">
+    {{entry-list selectedTags=tag entries=model showArchived=showArchived del=(action "delEntry")}}
+  </div>
+  <div class="four wide column">
+    <div class="ui fluid vertical menu">
+      {{#link-to "entries.new" class="item"}}
+          <i class="plus icon"></i>
+            New entry
+      {{/link-to}}
+      {{#if filters.lastEntry}}
+        <a class="item" {{action "clearHighlight"}}>
+          <i class="unhide icon"></i>
+          Clear highlight
+        </a>
+      {{/if}}
+      <a class="item">
+        <div class="header">Filtering options</div>
+        <div class="menu">
+          <a class="item">
+            {{#power-select-multiple
+              options=allTags
+              selected=tag
+              placeholder="Select tags to filter by..."
+              onchange=(action (mut tag))
+              as |tag|
+            }}
+              {{tag}}
+            {{/power-select-multiple}}
+          </a>
+          <a class="item">
+            <div class="ui toggle checkbox" data-test-toggle-archived>
+              <input type="checkbox" checked={{showArchived}} onchange={{action (pipe (action "clearHighlight") (toggle "showArchived" this))}}>
+              <label>Show archived?</label>
+            </div>
+          </a>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
 
-{{entry-list entries=model showArchived=showArchived del=(action "delEntry")}}

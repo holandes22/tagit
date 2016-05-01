@@ -4,10 +4,13 @@
   {{/if}}
   <div class="right floated content">
     <div class="ui two buttons">
-      <div class="ui basic red button">
+      <div class="ui basic red animated button">
       {{#hold-button action=(action "del") as |hold|}}
-        Hold to delete
-        {{hold.progress}}
+        <div class="visible content">Delete</div>
+        <div class="hidden content">
+          Hold
+          {{hold.progress}}
+        </div>
       {{/hold-button}}
       </div>
       {{link-to (t "edit") "entries.entry.edit" entry class="ui basic green button"}}
